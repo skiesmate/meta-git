@@ -3,13 +3,12 @@
 <head>
     <title>Search Page</title>
     <script>
-        function searchGoogle() {
+        function searchBing() {
             var query = document.getElementById('searchQuery').value;
             if (query.trim() !== '') {
-                var proxyUrl = 'https://api.allorigins.win/get?url=';
-                var searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+                var searchUrl = 'https://www.bing.com/search?q=' + encodeURIComponent(query);
                 var iframe = document.getElementById('searchResults');
-                iframe.src = proxyUrl + encodeURIComponent(searchUrl);
+                iframe.src = searchUrl;
             }
         }
     </script>
@@ -23,7 +22,7 @@
 </head>
 <body>
     <h1>Search Page</h1>
-    <form onsubmit="searchGoogle(); return false;">
+    <form onsubmit="searchBing(); return false;">
         <input type="text" id="searchQuery" placeholder="Enter your search query">
         <input type="submit" value="Search">
     </form>
