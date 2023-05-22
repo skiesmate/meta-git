@@ -8,18 +8,23 @@
             var query = document.getElementById('searchQuery').value;
             if (query.trim() !== '') {
                 var url = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-                var newWindow = window.open(url, '_blank');
-                if (newWindow) {
-                    newWindow.addEventListener('DOMContentLoaded', function () {
-                        var adblockplus = new newWindow.AdblockPlus();
-                        adblockplus.init().then(function () {
-                            adblockplus.enableBlocking();
-                        });
-                    });
-                }
+                var iframe = document.getElementById('searchResults');
+                iframe.src = url;
+                
+                var adblockplus = new AdblockPlus();
+                adblockplus.init().then(function () {
+                    adblockplus.enableBlockingInFrame(iframe.contentWindow);
+                });
             }
         }
     </script>
+    <style>
+        #searchResults {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
+    </style>
 </head>
 <body>
     <h1>Search Page</h1>
@@ -27,5 +32,6 @@
         <input type="text" id="searchQuery" placeholder="Enter your search query">
         <input type="submit" value="Search">
     </form>
+    <iframe id="searchResults"></iframe>
 </body>
 </html>
