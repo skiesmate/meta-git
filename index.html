@@ -2,19 +2,14 @@
 <html>
 <head>
     <title>Search Page</title>
-    <script src="https://cdn.adblockplus.org/adblockpluschrome-1.0.4.js"></script>
     <script>
         function searchGoogle() {
             var query = document.getElementById('searchQuery').value;
             if (query.trim() !== '') {
-                var url = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+                var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+                var searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(query);
                 var iframe = document.getElementById('searchResults');
-                iframe.src = url;
-                
-                var adblockplus = new AdblockPlus();
-                adblockplus.init().then(function () {
-                    adblockplus.enableBlockingInFrame(iframe.contentWindow);
-                });
+                iframe.src = proxyUrl + searchUrl;
             }
         }
     </script>
